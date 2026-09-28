@@ -1,0 +1,15 @@
+{
+  "name": "nightly-batch",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "deploy": "tsx nightly_batch.ts",
+    "resume": "tsx resume.ts"
+  },
+  "dependencies": {
+    "graphingest": "*"
+  },
+  "devDependencies": {
+    "tsx": "^4.20.0"
+  }
+}
