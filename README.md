@@ -23,7 +23,7 @@ Each row is remembered for a day. If the same row shows up again today, the save
 
 [The dashboard](https://www.graphingest.io/dashboard) shows the run, and [the runs page](https://www.graphingest.io/runs) shows which rows finished and which row failed.
 
-`resume.py` continues that same run on [graphingest.io](https://www.graphingest.io). `resume.ts` does the same thing for a TypeScript project. Finished rows stay finished. The failed row runs again, then the rows that were waiting behind it.
+This folder is the Python starter. `resume.py` continues that same run on [graphingest.io](https://www.graphingest.io). Finished rows stay finished. The failed row runs again, then the rows that were waiting behind it.
 
 You will need the run id from [the run page](https://www.graphingest.io/runs). It looks like a long id on that page. Put it in the command below. You also need the API key from [Settings](https://www.graphingest.io/settings), stored as `GRAPHINGEST_API_KEY`, not written into the file.
 
@@ -34,48 +34,26 @@ You will need the run id from [the run page](https://www.graphingest.io/runs). I
 
 ## How to run it
 
-Register the job and process twelve sample rows.
-
-Python:
+Register the job and process twelve sample rows:
 
 ```bash
 pip install -r requirements.txt
 python nightly_batch.py
 ```
 
-TypeScript, the same list and the same one-day memory:
-
-```bash
-npm install
-npm run deploy
-```
-
 Open [the dashboard](https://www.graphingest.io/dashboard) and confirm every sample row completed.
 
-To continue a run that stopped on a bad row, copy the id from [graphingest.io/runs](https://www.graphingest.io/runs).
-
-Python:
+To continue a run that stopped on a bad row, copy the id from [graphingest.io/runs](https://www.graphingest.io/runs):
 
 ```bash
 GRAPHINGEST_RUN_ID=the-id-from-the-dashboard python resume.py
 ```
 
-TypeScript:
-
-```bash
-GRAPHINGEST_RUN_ID=the-id-from-the-dashboard npm run resume
-```
-
-Replace `the-id-from-the-dashboard` with the id you copied. On Windows PowerShell, set the variable first, then run the file that matches the language you used to register the job:
+Replace `the-id-from-the-dashboard` with the id you copied. On Windows PowerShell, set the variable first:
 
 ```powershell
 $env:GRAPHINGEST_RUN_ID = "the-id-from-the-dashboard"
 python resume.py
 ```
 
-```powershell
-$env:GRAPHINGEST_RUN_ID = "the-id-from-the-dashboard"
-npm run resume
-```
-
-Then change the list in `nightly_batch.py` or `nightly_batch.ts` to your real rows. Each row needs an `id` so a repeat of the same row can be recognized. The next run shows up on [graphingest.io](https://www.graphingest.io) the same way the sample did.
+Then change the list in `nightly_batch.py` to your real rows. Each row needs an `id` so a repeat of the same row can be recognized. The next run shows up on [graphingest.io](https://www.graphingest.io) the same way the sample did.
